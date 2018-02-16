@@ -1,5 +1,4 @@
 import 'jquery';
-import '../scss/main.scss';
 import { showBtnElem, showPElem } from './dom';
 
 window.$ = $;

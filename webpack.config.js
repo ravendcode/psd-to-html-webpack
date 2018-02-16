@@ -22,7 +22,13 @@ const minify = {
 };
 
 const webpackConfig = {
-  entry: './src/js/main.js',
+  // entry: './src/js/main.js',
+  entry: {
+    bundle: [
+      './src/js/main.js',
+      './src/scss/main.scss',
+    ],
+  },
   output: {
     path: path.resolve(__dirname, 'dist'),
     filename: 'js/bundle.js',
@@ -56,7 +62,7 @@ const webpackConfig = {
         loader: 'babel-loader',
       },
     }, {
-      test: /\.scss$/,
+      test: /\.s[ac]ss$/,
       use: extractSass.extract({
         use: [{
           loader: 'css-loader',
@@ -76,6 +82,8 @@ const webpackConfig = {
           name: '[name].[ext]',
           outputPath: 'img/',
         },
+      }, {
+        loader: 'img-loader',
       }],
     }, {
       test: /\.(woff|woff2|eot|ttf|otf)$/,
