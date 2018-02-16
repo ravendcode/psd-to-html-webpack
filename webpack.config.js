@@ -28,10 +28,11 @@ const webpackConfig = {
       './src/js/main.js',
       './src/scss/main.scss',
     ],
+    vendor: ['jquery'],
   },
   output: {
     path: path.resolve(__dirname, 'dist'),
-    filename: 'js/bundle.js',
+    filename: 'js/[name].js',
     // publicPath: '/',
   },
   devtool: 'inline-source-map',
@@ -45,6 +46,9 @@ const webpackConfig = {
       'process.env': env,
     }),
     extractSass,
+    new webpack.optimize.CommonsChunkPlugin({
+      name: 'vendor',
+    }),
     new HtmlWebpackPlugin({
       template: 'src/index.html',
       inject: false,

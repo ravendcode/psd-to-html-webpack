@@ -1,8 +1,4 @@
-import 'jquery';
 import { showBtnElem, showPElem } from './dom';
-
-window.$ = $;
-window.jQuery = $;
 
 /* eslint-disable no-console */
 console.log('main.js', process.env.NODE_ENV);
