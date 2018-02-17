@@ -12,28 +12,36 @@ const extractSass = new ExtractTextPlugin({
   filename: 'css/bundle.css',
 });
 
+const includePages = [
+  'about.html',
+  'users.html',
+];
+
 const minify = {
   removeAttributeQuotes: false,
-  collapseWhitespace: false,
+  collapseWhitespace: true,
   html5: true,
   minifyCSS: true,
-  removeComments: false,
+  removeComments: true,
   removeEmptyAttributes: true,
 };
 
 const webpackConfig = {
-  // entry: './src/js/main.js',
   entry: {
-    bundle: [
-      './src/js/main.js',
-      './src/scss/main.scss',
-    ],
+    // bundle: [
+    //   './src/js/main.js',
+    //   './src/scss/main.scss',
+    // ],
     vendor: ['jquery'],
+    common: ['./src/js/common.js', './src/scss/main.scss'],
+    home: './src/js/pages/home.js',
+    about: './src/js/pages/about.js',
   },
   output: {
     path: path.resolve(__dirname, 'dist'),
     filename: 'js/[name].js',
     // publicPath: '/',
+    library: 'app',
   },
   devtool: 'inline-source-map',
   plugins: [
@@ -107,9 +115,6 @@ function includeHtml(files) {
   }
 }
 
-includeHtml([
-  'about.html',
-  'users.html',
-]);
+includeHtml(includePages);
 
 module.exports = webpackConfig;

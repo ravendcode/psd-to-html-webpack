@@ -7,3 +7,4 @@
 3. `yarn dev`
 4. `yarn build`
 5. `yarn prod`
+6. `yarn start`
