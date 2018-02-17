@@ -12,6 +12,10 @@ const extractSass = new ExtractTextPlugin({
   filename: 'css/bundle.css',
 });
 
+const extractPcss = new ExtractTextPlugin({
+  filename: 'css/bundle.css',
+});
+
 const includePages = [
   'about.html',
   'users.html',
@@ -24,6 +28,17 @@ const minify = {
   minifyCSS: true,
   removeComments: true,
   removeEmptyAttributes: true,
+};
+
+const postCssLoader = {
+  loader: 'postcss-loader',
+  options: {
+    config: {
+      ctx: {
+        cssnano: { env },
+      },
+    },
+  },
 };
 
 const webpackConfig = {
@@ -54,6 +69,7 @@ const webpackConfig = {
       'process.env': env,
     }),
     extractSass,
+    extractPcss,
     new webpack.optimize.CommonsChunkPlugin({
       name: 'vendor',
     }),
@@ -68,6 +84,17 @@ const webpackConfig = {
       test: /\.css$/,
       use: ['style-loader', 'css-loader'],
     }, {
+      test: /\.pcss$/,
+      use: extractPcss.extract({
+        use: [{
+          loader: 'css-loader',
+          options: {
+            importLoaders: 1,
+          },
+        }, postCssLoader],
+        fallback: 'style-loader',
+      }),
+    }, {
       test: /\.js$/,
       exclude: /(node_modules|bower_components)/,
       use: {
@@ -76,11 +103,11 @@ const webpackConfig = {
     }, {
       test: /\.s[ac]ss$/,
       use: extractSass.extract({
-        use: [{
-          loader: 'css-loader',
-        }, {
-          loader: 'sass-loader',
-        }],
+        use: [
+          'css-loader',
+          postCssLoader,
+          'sass-loader',
+        ],
         fallback: 'style-loader',
       }),
     }, {
