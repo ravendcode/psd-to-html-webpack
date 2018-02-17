@@ -16,11 +16,6 @@ const extractPcss = new ExtractTextPlugin({
   filename: 'css/bundle.css',
 });
 
-const includePages = [
-  'about.html',
-  'users.html',
-];
-
 const minify = {
   removeAttributeQuotes: false,
   collapseWhitespace: true,
@@ -40,6 +35,11 @@ const postCssLoader = {
     },
   },
 };
+
+const includePages = [
+  'about.html',
+  'users.html',
+];
 
 const webpackConfig = {
   entry: {
