@@ -28,8 +28,12 @@ module.exports = {
     'no-console': 1,
     'import/no-extraneous-dependencies': 0,
     'import/no-webpack-loader-syntax': 0,
-    'import/newline-after-import': 0,
     'import/no-unresolved': 0,
     'global-require': 0,
+    'prefer-template': 0,
+    'no-plusplus': 0,
+    'no-restricted-syntax': 0,
+    'no-await-in-loop': 0,
+    'no-useless-escape': 0,
   },
 };
