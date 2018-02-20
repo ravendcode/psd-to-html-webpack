@@ -58,7 +58,7 @@ const webpackConfig = {
     // publicPath: '/',
     library: 'app',
   },
-  devtool: 'inline-source-map',
+  devtool: 'source-map',
   plugins: [
     new CleanWebpackPlugin(['dist']),
     new webpack.ProvidePlugin({
