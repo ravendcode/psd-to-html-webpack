@@ -37,5 +37,6 @@ module.exports = {
     'no-useless-escape': 0,
     'max-len': 0,
     'no-unused-expressions': 0,
+    'import/export': 0,
   },
 };
